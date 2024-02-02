@@ -20,6 +20,10 @@ app.get('/add/:num1/:num2', (req, res) => {
     }
 });
 
+app.get('/', (req, res) => {
+    res.send('Sathwik thopu')
+})
+
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
