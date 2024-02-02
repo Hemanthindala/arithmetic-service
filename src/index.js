@@ -21,7 +21,7 @@ app.get('/add/:num1/:num2', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.send('Sathwik thopu')
+    res.send('hello')
 })
 
 app.listen(port, () => {
