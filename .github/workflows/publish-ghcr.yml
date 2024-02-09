@@ -12,4 +12,5 @@ jobs:
         run:   |
           docker login --username hemanthindala --password ${{secrets.ACCESS_TOKEN}} ghcr.io
           docker build -t ghcr.io/hemanthindala/arithmetic-service:latest --file Dockerfile .
-          docker push ghcr.io/hemanthindala/arithmetic-service:latest
+          docker push ghcr.io/hemanthindala/arithmetic-service:latest 
+          
