@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const {add} = require('./arithmetica')
 app.use(cors());
 const port = 3000;
 
@@ -13,8 +14,8 @@ app.get('/add/:num1/:num2', (req, res) => {
     // Checking if both parameters are valid numbers
     if (!isNaN(num1) && !isNaN(num2)) {
         // Calculating the sum
-        const sum = num1 + num2;
-        res.send({result: sum});
+        let sum = add(num1,num2);
+            res.json(sum);
     } else {
         res.status(400).send('Invalid input. Please provide valid numbers.');
     }
