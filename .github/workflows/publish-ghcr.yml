@@ -1,17 +1,24 @@
 name: Docker Image CI for GHCR
+
 on:
-    push
+  push
+
 jobs:
-    build_and_publish:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - name: npm install
-              run: npm ci
-            - name: run the unit tests
-              run: npm test
-            - name: Build and push the image
-              run:  |
-                docker login --username hemanthindala --password ${{secrets.ACCESS_TOKEN}} ghcr.io
-                docker build -t ghcr.io/hemanthindala/primes-service:latest --file Dockerfile .
-                docker push ghcr.io/hemanthindala/primes-service:latest
+  build_and_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: npm install
+        run: npm ci
+      - name: run the unit tests
+        run: npm test
+      - name: Build and push the image
+        run: |
+          docker login --username hemanthindala --password ${{secrets.ACCESS_TOKEN}} ghcr.io
+          docker build -t ghcr.io/hemanthindala/arithmetic-service:latest --file Dockerfile .  
+          docker push ghcr.io/hemanthindala/arithmetic-service:latest
+      - name: Publish the image to azure container registry
+        run: |
+          docker login --username practicum16vindala --password ${{secrets.AZURE_CONTAINER_REGISTRY}} practicum16vindala.azurecr.io
+          docker tag ghcr.io/hemanthindala/arithmetic-service:latest practicum16vindala.azurecr.io/arithmetic-service:latest
+          docker push practicum16vindala.azurecr.io/arithmetic-service:latest
